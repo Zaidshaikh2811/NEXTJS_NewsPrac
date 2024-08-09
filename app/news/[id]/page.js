@@ -1,10 +1,14 @@
+import { notFound } from "next/navigation";
 import { DUMMY_NEWS } from "@/dumy-news";
 
 export default function NewsSpec({ params }) {
     const newsId = params.id;
     const newsItem = DUMMY_NEWS.find(newsItem => newsItem.slug == newsId)
+    if (!newsItem) {
+        notFound()
+    }
     return (
-        <article>
+        <article className="news-article">
             <header >
                 <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
 
